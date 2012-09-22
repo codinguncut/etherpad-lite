@@ -23,6 +23,7 @@
  // These parameters were global, now they are injected. A reference to the
  // Timeslider controller would probably be more appropriate.
 var _ = require('./underscore');
+require('./jquery');
 
 function loadBroadcastSliderJS(fireWhenAllScriptsAreLoaded)
 {
@@ -258,7 +259,16 @@ function loadBroadcastSliderJS(fireWhenAllScriptsAreLoaded)
         }
         setSliderPosition(getSliderPosition() + 1);
 
-        setTimeout(playButtonUpdater, 100);
+        // calculate time_delta to next revision
+        pos = getSliderPosition();
+        path = revisionInfo.getPath(pos, pos+1);
+        time_delta = 0;
+        for (var i = 0; i < path.changesets.length; i++)
+        {
+          time_delta += path.times[i];
+        }
+        time_delta = time_delta * 1000;
+        setTimeout(playButtonUpdater, time_delta);
       }
     }
 
