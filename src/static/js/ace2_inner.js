@@ -3287,6 +3287,8 @@ function Ace2Inner(){
 
   function doIndentOutdent(isOut)
   {
+    //CHANGE JONAS
+    return false;
     if (!(rep.selStart && rep.selEnd) ||
         ((rep.selStart[0] == rep.selEnd[0]) && (rep.selStart[1] == rep.selEnd[1]) &&  rep.selEnd[1] > 1))
     {
