@@ -1009,7 +1009,7 @@ function init() {
 var settings = {
   LineNumbersDisabled: false
 , noColors: false
-, useMonospaceFontGlobal: false
+, useMonospaceFontGlobal: true 
 , globalUserName: false
 , rtlIsTrue: false
 };
