@@ -25,10 +25,9 @@
 var _ = require('./underscore');
 require('./jquery');
 
+var BroadcastSlider;
 function loadBroadcastSliderJS(fireWhenAllScriptsAreLoaded)
 {
-  var BroadcastSlider;
-
   (function()
   { // wrap this code in its own namespace
     var sliderLength = 1000;
@@ -267,6 +266,9 @@ function loadBroadcastSliderJS(fireWhenAllScriptsAreLoaded)
         {
           time_delta += path.times[i];
         }
+        if (time_delta < 0) {
+          time_delta = 0;
+        }
         time_delta = time_delta * 1000;
         setTimeout(playButtonUpdater, time_delta);
       }
@@ -384,6 +386,12 @@ function loadBroadcastSliderJS(fireWhenAllScriptsAreLoaded)
         });
       })
 
+      // JONAS, easier to trigger than mousedown, mouseup
+      $("#playpause_button").click(function(evt) {
+        console.log('playpause');
+        BroadcastSlider.playpause();
+      });
+      /*
       // play/pause toggling
       $("#playpause_button").mousedown(function(evt)
       {
@@ -402,6 +410,7 @@ function loadBroadcastSliderJS(fireWhenAllScriptsAreLoaded)
           $(document).unbind('mouseup');
         });
       });
+      */
 
       // next/prev saved revision and changeset
       $('.stepper').mousedown(function(evt)

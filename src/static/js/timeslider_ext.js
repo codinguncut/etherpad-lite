@@ -57,10 +57,10 @@ function init() {
     //get the correct port
     var port = loc.port == "" ? (loc.protocol == "https:" ? 443 : 80) : loc.port;
     //create the url
+    port = 9001;
     var url = loc.protocol + "//" + loc.hostname + ":" + port + "/";
     //find out in which subfolder we are
     var resource = exports.baseURL.substring(1) + 'socket.io';
-    //console.log('timeslider.js', url, resource);
     
     //build up the socket io connection
     socket = io.connect(url, {resource: resource});

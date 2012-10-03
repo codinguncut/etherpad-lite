@@ -6,10 +6,10 @@
 
   <title>Etherpad Lite Timeslider</title>
 
-  <link rel="shortcut icon" href="../../favicon.ico">
-  <link rel="stylesheet" href="../../static/css/pad.css">
-  <link rel="stylesheet" href="../../static/css/timeslider.css">
-  <link rel="stylesheet" href="../../static/custom/timeslider.css">
+  <link rel="shortcut icon" href="etherpad-lite/src/favicon.ico">
+  <link rel="stylesheet" href="etherpad-lite/src/static/css/pad.css">
+  <link rel="stylesheet" href="etherpad-lite/src/static/css/timeslider.css">
+  <link rel="stylesheet" href="etherpad-lite/src/static/custom/timeslider.css">
   <style type="text/css" title="dynamicsyntax"></style>
 </head>
 
@@ -111,9 +111,9 @@
     
     // Strip 'p', the padname and 'timeslider' from the pathname and set as baseURL
     var baseURL = pathComponents.slice(0,pathComponents.length-3).join('/') + '/';
-    
-   
-    console.log('setRoot', baseURL);
+  
+    baseURL = '/etherpad-lite/';
+    console.log('baseURL', baseURL);
     require.setRootURI(baseURL + "javascripts/src");
     require.setLibraryURI(baseURL + "javascripts/lib");
     require.setGlobalKeyPath("require");
