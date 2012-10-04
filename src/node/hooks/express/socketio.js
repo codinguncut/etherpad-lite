@@ -5,7 +5,6 @@ var socketIORouter = require("../../handler/SocketIORouter");
 var hooks = require("ep_etherpad-lite/static/js/pluginfw/hooks");
 
 var padMessageHandler = require("../../handler/PadMessageHandler");
-var timesliderMessageHandler = require("../../handler/TimesliderMessageHandler");
 
 var connect = require('connect');
  
@@ -27,10 +26,13 @@ exports.expressCreateServer = function (hook_name, args, cb) {
     });
   });
 
-
-  //this is only a workaround to ensure it works with all browers behind a proxy
-  //we should remove this when the new socket.io version is more stable
-  io.set('transports', ['xhr-polling']);
+  // the following has been successfully tested with the following browsers 
+  // works also behind reverse proxy
+  // Firefox 14.0.1
+  // IE8 with Native XMLHTTP support
+  // IE8 without Native XMLHTTP support
+  // Chrome 21.0.1180.79
+  io.set('transports', ['jsonp-polling']);
 
   var socketIOLogger = log4js.getLogger("socket.io");
   io.set('logger', {
@@ -59,7 +61,6 @@ exports.expressCreateServer = function (hook_name, args, cb) {
   //Initalize the Socket.IO Router
   socketIORouter.setSocketIO(io);
   socketIORouter.addComponent("pad", padMessageHandler);
-  socketIORouter.addComponent("timeslider", timesliderMessageHandler);
 
   hooks.callAll("socketio", {"app": args.app, "io": io});
 }
